@@ -1,11 +1,11 @@
-Desafio POC - Serialização e Desserialização.
+### Desafio POC - Serialização e Desserialização.
 
 
-Você vai fazer um projeto Spring Boot que tenha dois endpoints
+#### Você vai fazer um projeto Spring Boot que tenha dois endpoints
 
  
 
-POST /file/save
+#### POST /file/save
 -> Recebe uma String ao invés de um OBJETO e essa string deve ser um JSON valido 
 -> Pega essa String e desserializa para Byte Array (byte[])
 -> Escreve um arquivo na raiz do projeto com o arquivo
@@ -13,14 +13,14 @@ POST /file/save
 
  
 
-GET /file
+#### GET /file
 -> Busca um arquivo de nome "processed.json" na raiz do diretório 
 -> Serializa o arquivo em uma Classe valida 
 -> Entrega a classe valida como Response pro usuário
 
  
 
-Objetivo : 
+#### Objetivo : 
 -> Operações básicas 
 -> Entendimento de Serialização e Desserialização 
 -> Entendimento de recursos básicos da lib jakarta.nio.files/ java.nio.files
