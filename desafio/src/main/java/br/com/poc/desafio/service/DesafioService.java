@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 
 @Service
 public class DesafioService {
@@ -17,7 +16,7 @@ public class DesafioService {
 
     public ResponseEntity saveString(String string) throws IOException {
 
-        if(Files.exists(BASE_DIR)){
+        if(Files.notExists(BASE_DIR)){
              Files.createDirectory(BASE_DIR);
          }
 
@@ -31,19 +30,17 @@ public class DesafioService {
 
     }
 
-    public ResponseEntity getString() throws IOException{
+    public byte[] getString() throws IOException{
         Path path_arquive = BASE_DIR.resolve("processed.json");
 
 
-        if(Files.exists(path_arquive)){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        if(Files.notExists(path_arquive)){
+            System.out.println("Arquivo não encontrado");
         }
 
         byte[] jsonString = Files.readAllBytes(path_arquive);
 
-        String string = jsonString.toString();
-
-        return ResponseEntity.status(HttpStatus.FOUND).body("String serializada e desserializada: " + string);
+        return jsonString;
     }
 
 
