@@ -28,7 +28,7 @@ public class DesafioController {
 
     @GetMapping
     public ResponseEntity getFile()throws IOException{
-        service.getString();
-        return ResponseEntity.status(HttpStatus.OK).build();
+        String string = new String(service.getString());
+        return ResponseEntity.status(HttpStatus.OK).body("A String enviada é: "+ string);
     }
 }
