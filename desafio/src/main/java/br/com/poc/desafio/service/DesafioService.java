@@ -1,7 +1,6 @@
 package br.com.poc.desafio.service;
 
 
-import com.fasterxml.jackson.core.JsonParser;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -21,7 +20,7 @@ public class DesafioService {
 
         Path path_archive = BASE_DIR.resolve("processed.json");
 
-       if(string.contains("{") && string.contains("}") && string.contains(":")){
+       if(string.startsWith("{") && string.endsWith("}")){
            byte[] jsonString = string.getBytes();
            Files.write(path_archive,jsonString);
 
