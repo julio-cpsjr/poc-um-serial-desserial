@@ -1,8 +1,6 @@
 package br.com.poc.desafio.service;
 
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -14,7 +12,7 @@ public class DesafioService {
 
     public Path BASE_DIR = Path.of("./storage");
 
-    public ResponseEntity saveString(String string) throws IOException {
+    public boolean saveString(String string) throws IOException {
 
         if(Files.notExists(BASE_DIR)){
              Files.createDirectory(BASE_DIR);
@@ -22,12 +20,16 @@ public class DesafioService {
 
         Path path_archive = BASE_DIR.resolve("processed.json");
 
-        byte[] jsonString = string.getBytes();
+       if(string.contains("{\"") && string.contains("}") && string.contains("\":")){
+           byte[] jsonString = string.getBytes();
 
-        Files.write(path_archive,jsonString);
+           Files.write(path_archive,jsonString);
 
-        return ResponseEntity.status(HttpStatus.OK).build();
-
+           return true;
+       }else{
+           System.out.println("Json inválido ");
+           return false;
+       }
     }
 
     public byte[] getString() throws IOException{
