@@ -1,6 +1,7 @@
 package br.com.poc.desafio.service;
 
 
+import com.fasterxml.jackson.core.JsonParser;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ public class DesafioService {
 
     public Path BASE_DIR = Path.of("./storage");
 
-    public boolean saveString(String string) throws IOException {
+    public boolean saveJson(String string) throws IOException {
 
         if(Files.notExists(BASE_DIR)){
              Files.createDirectory(BASE_DIR);
@@ -20,9 +21,8 @@ public class DesafioService {
 
         Path path_archive = BASE_DIR.resolve("processed.json");
 
-       if(string.contains("{\"") && string.contains("}") && string.contains("\":")){
+       if(string.contains("{") && string.contains("}") && string.contains(":")){
            byte[] jsonString = string.getBytes();
-
            Files.write(path_archive,jsonString);
 
            return true;
@@ -32,7 +32,7 @@ public class DesafioService {
        }
     }
 
-    public byte[] getString() throws IOException{
+    public byte[] getBytes() throws IOException{
         Path path_arquive = BASE_DIR.resolve("processed.json");
 
 
