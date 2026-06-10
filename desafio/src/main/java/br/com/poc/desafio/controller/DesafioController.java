@@ -1,6 +1,7 @@
 package br.com.poc.desafio.controller;
 
 
+import br.com.poc.desafio.models.UsuarioModel;
 import br.com.poc.desafio.service.DesafioService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,18 +25,13 @@ public class DesafioController {
 
     @PostMapping("/save")
     public ResponseEntity saveFile(@RequestBody String string) throws IOException {
-        if(service.saveJson(string)){
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        }else{
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Json Inválido.");
-        }
+        service.saveJson(string);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
     public ResponseEntity getFile()throws IOException{
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode rootJson = mapper.readTree(service.getBytes());
-        Object jsonObject = rootJson;
-        return ResponseEntity.status(HttpStatus.OK).body("Json Enviado: " + rootJson.asText() + " Classe: " + jsonObject.getClass());
+        UsuarioModel user =  service.getUsuario();
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }
